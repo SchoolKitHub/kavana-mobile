@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavigationContainer, DarkTheme } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { StatusBar } from 'expo-status-bar';
@@ -12,6 +12,7 @@ import CaptureScreen from './src/screens/CaptureScreen';
 import SavedScreen from './src/screens/SavedScreen';
 import QuizScreen from './src/screens/QuizScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
+import SplashScreen from './src/components/SplashScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -28,6 +29,8 @@ const KavanaTheme = {
 };
 
 export default function App() {
+  const [isLoading, setIsLoading] = useState(true);
+
   return (
     <SafeAreaProvider>
       <StatusBar style="light" backgroundColor={Colors.background} />
@@ -73,6 +76,10 @@ export default function App() {
           <Tab.Screen name="Profile" component={ProfileScreen} />
         </Tab.Navigator>
       </NavigationContainer>
+      {isLoading && (
+        <SplashScreen onComplete={() => setIsLoading(false)} />
+      )}
     </SafeAreaProvider>
   );
 }
+
