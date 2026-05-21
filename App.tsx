@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Platform } from 'react-native';
 import { NavigationContainer, DarkTheme } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { StatusBar } from 'expo-status-bar';
@@ -36,6 +37,7 @@ export default function App() {
       <StatusBar style="light" backgroundColor={Colors.background} />
       <NavigationContainer theme={KavanaTheme}>
         <Tab.Navigator
+          safeAreaInsets={Platform.OS === 'web' ? { bottom: 0, top: 0, left: 0, right: 0 } : undefined}
           screenOptions={({ route }) => ({
             headerShown: false,
             tabBarActiveTintColor: Colors.primary,
@@ -45,13 +47,13 @@ export default function App() {
               borderTopColor: Colors.border,
               borderTopWidth: 1,
               paddingTop: 8,
-              paddingBottom: 8,
-              height: 64,
+              paddingBottom: Platform.OS === 'web' ? 12 : 8,
+              height: Platform.OS === 'web' ? 70 : 64,
             },
             tabBarLabelStyle: {
               fontSize: 10,
               fontWeight: 'bold',
-              marginBottom: 4,
+              marginBottom: Platform.OS === 'web' ? 2 : 4,
             },
             tabBarIcon: ({ color, size }) => {
               if (route.name === 'Home') {
