@@ -32,7 +32,7 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   return (
-    <SafeAreaProvider>
+    <SafeAreaProvider style={{ flex: 1, backgroundColor: Colors.background }}>
       <StatusBar style="light" backgroundColor={Colors.background} />
       <NavigationContainer theme={KavanaTheme}>
         <Tab.Navigator
